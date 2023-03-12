@@ -1,0 +1,27 @@
+<main class="w-screen h-screen bg-white sm:bg-gray-50 relative">
+    <div class="relative w-full sm:w-7/12 md:w-6/12 lg:w-4/12 m-auto">
+        <div class="bg-white rounded shadow-none sm:shadow-lg py-4 px-6 md:px-10">
+            <div class="mb-4">
+                <h1 class="text-center font-bold pt-4 pb-8 text-gray-600">
+                    Log In to Trello
+                </h1>
+                <form novalidate class="space-y-4">
+                    <div>
+                        <div class="relative">
+                            <input type="text" id="username" class="w-full rounded bg-gray-100 border-gray-300 border-2" placeholder="Enter username" maxlength="50">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="relative">
+                            <input type="password" id="password" class="w-full rounded bg-gray-100 border-gray-300 border-2" placeholder="Enter password" maxlength="30">
+                        </div>
+                    </div>
+                    <div>
+                        <app-main-button [type]="'submit'" [colorStyle]="'success'">Log In</app-main-button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</main>
