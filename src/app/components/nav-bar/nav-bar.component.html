@@ -19,7 +19,13 @@
                 </ul>
             </div>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center gap-x-4">
+            <button class="text-white" type="button">
+                <fa-icon [icon]="faBell"></fa-icon>
+            </button>
+            <button class="text-white" type="button">
+                <fa-icon [icon]="faInfoCircle"></fa-icon>
+              </button>
             <button type="button" class="flex rounded-full" aria-expanded="false" type="button"
                 (click)="isOpen = !isOpen" cdkOverlayOrigin #menuOverlay="cdkOverlayOrigin">
                 <img class="w-8 h-8 rounded-full" src="https://api.lorem.space/image/face?w=400&h=400"
