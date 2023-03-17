@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -23,7 +24,8 @@ import { LoginComponent } from './pages/login/login.component';
     BrowserModule,
     OverlayModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CdkAccordionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
