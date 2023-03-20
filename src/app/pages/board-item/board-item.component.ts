@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Dialog } from '@angular/cdk/dialog';
 
 import { BoardColumn } from '../../models/board-colum.model';
 import { BoardTask } from '../../models/board-task.model';
+
+import { TaskDialogComponent } from '../../components/task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-board-item',
@@ -22,6 +25,7 @@ import { BoardTask } from '../../models/board-task.model';
   ]
 })
 export class BoardItemComponent {
+  constructor(private dialog: Dialog) {}
 
   columns: BoardColumn[] = [
     {
@@ -75,6 +79,20 @@ export class BoardItemComponent {
     this.columns.push({
       title: 'New Column',
       items: []
+    });
+  }
+
+  openDialog(task: BoardTask) {
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '50%',
+      autoFocus: false,
+      data: {
+        task: task
+      }
+    });
+
+    dialogRef.closed.subscribe(result => {
+      console.log(result);
     });
   }
 }

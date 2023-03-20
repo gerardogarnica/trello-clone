@@ -22,6 +22,7 @@
                         (cdkDropListDropped)="drop($event)">
                         <div
                             class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+                            (click)="openDialog(item)"
                             *ngFor="let item of column.items"
                             cdkDrag>
                             {{ item.title }}
