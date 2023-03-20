@@ -10,7 +10,8 @@ module.exports = {
       colors: {
         danger: colors.red,
         primary: colors.blue,
-        success: colors.green
+        success: colors.green,
+        shadow: colors.gray
       },
       container: {
         screens: {
