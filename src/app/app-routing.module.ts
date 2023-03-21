@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './pages/board/board.component';
 import { BoardItemComponent } from './pages/board-item/board-item.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ScrollComponent } from './pages/scroll/scroll.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'board',
     component: BoardItemComponent
+  },
+  {
+    path: 'scroll',
+    component: ScrollComponent
   }
 ];
 
