@@ -11,9 +11,11 @@ export class DataSourceProduct extends DataSource<Product> {
         return this.data;
     }
 
-    disconnect() { }
+    disconnect() {
+        return;
+    }
 
-    init(products: Product[]) {
+    init(products: Product[]): void {
         this.initialData = products;
         this.data.next(products);
     }

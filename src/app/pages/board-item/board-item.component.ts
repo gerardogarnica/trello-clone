@@ -74,8 +74,6 @@ export class BoardItemComponent {
   }
 
   addColumn() {
-    columnTitle: 'New Column';
-
     this.columns.push({
       title: 'New Column',
       items: []
