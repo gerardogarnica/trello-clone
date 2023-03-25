@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-main-button',
@@ -6,8 +7,12 @@ import { Component, Input } from '@angular/core';
 })
 export class MainButtonComponent {
 
+  @Input() disabled = false;
+  @Input() loading = false;
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
   @Input() colorStyle: 'danger' | 'primary' | 'shadow' | 'success' = 'primary';
+
+  faSpinner = faSpinner;
 
   mapColors = {
     success: {
@@ -36,7 +41,7 @@ export class MainButtonComponent {
     }
   }
 
-  get colors(): any {
+  get colors() {
     const colors = this.mapColors[this.colorStyle];
 
     if (colors) {

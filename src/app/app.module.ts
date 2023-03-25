@@ -13,7 +13,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainButtonComponent } from './components/main-button/main-button.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { BoardComponent } from './pages/board/board.component';
@@ -25,7 +24,6 @@ import { TableComponent } from './pages/table/table.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MainButtonComponent,
     NavBarComponent,
     TaskDialogComponent,
     BoardComponent,
