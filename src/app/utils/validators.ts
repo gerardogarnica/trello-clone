@@ -7,7 +7,7 @@ export class CustomValidators {
             const targetCtrl = control.get(target);
 
             return sourceCtrl && targetCtrl && sourceCtrl.value !== targetCtrl.value
-                ? { match: true }
+                ? { mismatch: true }
                 : null;
         }
     }
