@@ -1,0 +1,107 @@
+<h1 class="text-center font-bold py-2 text-gray-600">
+    Register to Trello
+</h1>
+<form [formGroup]="form" novalidate class="space-y-4" (ngSubmit)="doRegister($event)">
+    <div>
+        <div class="relative">
+            <input
+                #nameInput
+                type="text"
+                id="name"
+                formControlName="name"
+                placeholder="Enter your name"
+                maxlength="50"
+                class="w-full rounded bg-gray-100 border-gray-300 border-2">
+        </div>
+        <div *ngIf="form.controls.name.touched && form.controls.name.invalid">
+            <p *ngIf="form.controls.name.hasError('required')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Name is required.
+            </p>
+            <p *ngIf="form.controls.name.hasError('minlength')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Name must contain at least 3 characters.
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <div class="relative">
+            <input
+                #nameInput
+                type="email"
+                id="username"
+                formControlName="username"
+                placeholder="Enter username"
+                maxlength="50"
+                class="w-full rounded bg-gray-100 border-gray-300 border-2">
+        </div>
+        <div *ngIf="form.controls.username.touched && form.controls.username.invalid">
+            <p *ngIf="form.controls.username.hasError('required')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Username is required.
+            </p>
+            <p *ngIf="form.controls.username.hasError('email')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Username should be an email.
+            </p>
+            <p *ngIf="form.controls.username.hasError('minlength')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Username must contain at least 3 characters.
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <div class="relative">
+            <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                formControlName="password"
+                placeholder="Enter password"
+                maxlength="30"
+                class="w-full rounded bg-gray-100 border-gray-300 border-2">
+            <button type="button" class="p-2 absolute right-2" (click)="showPassword = !showPassword">
+                <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
+            </button>
+        </div>
+        <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
+            <p *ngIf="form.controls.password.hasError('required')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Password is required.
+            </p>
+            <p *ngIf="form.controls.password.hasError('minlength')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Password must contain at least 6 characters.
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <div class="relative">
+            <input
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                id="confirmPassword"
+                formControlName="confirmPassword"
+                placeholder="Confirm password"
+                maxlength="30"
+                class="w-full rounded bg-gray-100 border-gray-300 border-2">
+            <button type="button" class="p-2 absolute right-2" (click)="showConfirmPassword = !showConfirmPassword">
+                <fa-icon [icon]="showConfirmPassword ? faEye : faEyeSlash"></fa-icon>
+            </button>
+        </div>
+        <div *ngIf="form.controls.confirmPassword.touched && form.controls.confirmPassword.invalid">
+            <p *ngIf="form.controls.confirmPassword.hasError('required')" class="font-medium text-red-500 text-xs mt-1 ml-1">
+                Password is required.
+            </p>
+        </div>
+    </div>
+
+    <div *ngIf="form.controls.confirmPassword.touched" class="font-medium text-red-500 text-xs mt-1 ml-1">
+        <p *ngIf="form.hasError('mismatch')">
+            Passwords do not match.
+        </p>
+    </div>
+
+    <div>
+        <app-main-button
+            [type]="'submit'"
+            [colorStyle]="'success'"
+            [loading]="status === 'loading'">
+            Register
+        </app-main-button>
+    </div>
+</form>

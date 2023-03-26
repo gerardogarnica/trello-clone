@@ -17,7 +17,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { BoardComponent } from './pages/board/board.component';
 import { BoardItemComponent } from './pages/board-item/board-item.component';
-import { LoginComponent } from './pages/login/login.component';
 import { ScrollComponent } from './pages/scroll/scroll.component';
 import { TableComponent } from './pages/table/table.component';
 
@@ -28,7 +27,6 @@ import { TableComponent } from './pages/table/table.component';
     TaskDialogComponent,
     BoardComponent,
     BoardItemComponent,
-    LoginComponent,
     ScrollComponent,
     TableComponent
   ],
