@@ -3,6 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faEye, faEyeSlash, faPen } from '@fortawesome/free-solid-svg-icons';
 
+import { RequestStatus } from '@models/request-status.model';
+import { AuthService } from '@services/auth/auth.service';
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html'
@@ -16,11 +19,12 @@ export class LoginFormComponent {
   faEyeSlash = faEyeSlash;
   faPen = faPen;
   showPassword = false;
-  status = 'init';
+  status: RequestStatus = 'init';
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService : AuthService
   ) { }
 
   doLogin(event: Event) {
@@ -31,6 +35,18 @@ export class LoginFormComponent {
     }
 
     this.status = 'loading';
-    // TODO: Login
+
+    const { username, password } = this.form.getRawValue();
+    this.authService
+      .login(username, password)
+      .subscribe({
+        next: () => {
+          this.status = 'success';
+          this.router.navigate(['/trello']);
+        },
+        error: () => {
+          this.status = 'error';
+        }
+      });
   }
 }
