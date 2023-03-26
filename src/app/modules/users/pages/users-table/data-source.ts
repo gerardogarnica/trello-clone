@@ -1,13 +1,13 @@
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Product } from '../../models/product.model';
+import { Product } from '@models/product.model';
 
-export class DataSourceProduct extends DataSource<Product> {
-    data = new BehaviorSubject<Product[]>([]);
-    initialData: Product[] = [];
+export class DataSourceUser extends DataSource<any[]> {
+    data = new BehaviorSubject<any[]>([]);
+    initialData: any[] = [];
 
-    connect(): Observable<Product[]> {
+    connect(): Observable<any[]> {
         return this.data;
     }
 
@@ -15,9 +15,9 @@ export class DataSourceProduct extends DataSource<Product> {
         return;
     }
 
-    init(products: Product[]): void {
-        this.initialData = products;
-        this.data.next(products);
+    init(data: any[]): void {
+        this.initialData = data;
+        this.data.next(data);
     }
 
     getTotalPrices() {
