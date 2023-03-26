@@ -2,13 +2,13 @@ import { Component, Inject } from '@angular/core';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { faBars, faCheckSquare, faCheckToSlot, faClock, faClose, faTag, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { BoardTask } from '../../models/board-task.model';
+import { BoardTask } from '@models/board-task.model';
 
-interface DialogInputData {
+interface InputDialogData {
   task: BoardTask;
 }
 
-interface DialogOutputData {
+interface OutputDialogData {
   response: boolean;
 }
 
@@ -28,20 +28,18 @@ export class TaskDialogComponent {
   task: BoardTask;
 
   constructor(
-    private dialogRef: DialogRef<DialogOutputData>,
-    @Inject(DIALOG_DATA) data: DialogInputData
-    ) { 
-      this.task = data.task;
-    }
-
-    close() {
-      this.dialogRef.close();
-    }
-  
-    closeWithResponse(response: boolean) {
-      this.dialogRef.close({
-        response: response
-      });
-    }
-  
+    private dialogRef: DialogRef<OutputDialogData>,
+    @Inject(DIALOG_DATA) data: InputDialogData) {
+    this.task = data.task;
   }
+
+  close() {
+    this.dialogRef.close();
+  }
+
+  closeWithResponse(response: boolean) {
+    this.dialogRef.close({
+      response: response
+    });
+  }
+}

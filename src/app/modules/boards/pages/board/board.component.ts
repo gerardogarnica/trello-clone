@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
 
-import { BoardColumn } from '../../models/board-colum.model';
-import { BoardTask } from '../../models/board-task.model';
+import { BoardColumn } from '@models/board-colum.model';
+import { BoardTask } from '@models/board-task.model';
 
 import { TaskDialogComponent } from '../../components/task-dialog/task-dialog.component';
 
 @Component({
-  selector: 'app-board-item',
-  templateUrl: './board-item.component.html',
+  selector: 'app-board',
+  templateUrl: './board.component.html',
   styles: [
     `
     /* Animate items as they're being sorted. */
@@ -24,9 +24,7 @@ import { TaskDialogComponent } from '../../components/task-dialog/task-dialog.co
     `
   ]
 })
-export class BoardItemComponent {
-  constructor(private dialog: Dialog) {}
-
+export class BoardComponent {
   columns: BoardColumn[] = [
     {
       title: 'To Do',
@@ -55,10 +53,10 @@ export class BoardItemComponent {
   ]
 
   todos: BoardTask[] = [];
-
   doings: BoardTask[] = [];
-
   dones: BoardTask[] = [];
+
+  constructor(private dialog: Dialog) {}
 
   drop(event: CdkDragDrop<BoardTask[]>) {
     if (event.previousContainer === event.container) {
