@@ -14,7 +14,7 @@ export class RedirectGuard implements CanActivate {
   ) { }
 
   canActivate(): boolean {
-    if (this.tokenService.hasToken()) {
+    if (this.tokenService.isValidToken()) {
       this.router.navigate(['/trello']);
     }
     return true;
