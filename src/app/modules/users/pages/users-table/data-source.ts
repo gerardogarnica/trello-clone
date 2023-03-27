@@ -1,13 +1,13 @@
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Product } from '@models/product.model';
+import { User } from '@models/user.model';
 
-export class DataSourceUser extends DataSource<any[]> {
-    data = new BehaviorSubject<any[]>([]);
-    initialData: any[] = [];
+export class DataSourceUser extends DataSource<User> {
+    data = new BehaviorSubject<User[]>([]);
+    initialData: User[] = [];
 
-    connect(): Observable<any[]> {
+    connect(): Observable<User[]> {
         return this.data;
     }
 
@@ -15,12 +15,12 @@ export class DataSourceUser extends DataSource<any[]> {
         return;
     }
 
-    init(data: any[]): void {
+    init(data: User[]): void {
         this.initialData = data;
         this.data.next(data);
     }
 
-    getTotalPrices() {
+    /* getTotalPrices() {
         const products = this.data.getValue();
         return products
             .map(product => product.price)
@@ -45,5 +45,5 @@ export class DataSourceUser extends DataSource<any[]> {
                 || product.price.toString().includes(query));
 
         this.data.next(filteredProducts);
-    }
+    } */
 }
