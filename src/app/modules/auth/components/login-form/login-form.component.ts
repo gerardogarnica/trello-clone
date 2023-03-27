@@ -13,7 +13,7 @@ import { AuthService } from '@services/auth/auth.service';
 export class LoginFormComponent {
   form = this.formBuilder.nonNullable.group({
     username: ['', [Validators.required, Validators.email, Validators.minLength(3)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
   faEye = faEye;
   faEyeSlash = faEyeSlash;
