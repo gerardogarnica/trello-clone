@@ -8,7 +8,7 @@ import { TokenService } from '@services/token/token.service';
   providedIn: 'root'
 })
 export class UsersService {
-  private apiUrl = `https://fake-trello-api.herokuapp.com/api/v1/users`
+  apiUrl = `https://fake-trello-api.herokuapp.com/api/v1/users`
 
   constructor(
     private http: HttpClient,
