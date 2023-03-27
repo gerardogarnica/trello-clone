@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
+import { checkToken } from '@interceptors/token.interceptor';
 import { AuthResponse } from '@models/auth.model';
 import { User } from '@models/user.model';
 import { TokenService } from '@services/token/token.service';
@@ -52,15 +53,12 @@ export class AuthService {
   }
 
   getProfile() {
-    return this.http.get<User>(`${this.apiUrl}/profile`, {
-      headers: {
-        Authorization: `Bearer ${this.tokenService.getToken()}`
-      }
-    }).pipe(
-      tap(user => {
-        this.user$.next(user);
-      })
-    );
+    return this.http.get<User>(`${this.apiUrl}/profile`, { context: checkToken() })
+      .pipe(
+        tap(user => {
+          this.user$.next(user);
+        })
+      );
   }
 
   logout() {
