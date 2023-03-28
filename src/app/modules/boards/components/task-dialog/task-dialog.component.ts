@@ -2,10 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { faBars, faCheckSquare, faCheckToSlot, faClock, faClose, faTag, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { BoardTask } from '@models/board-task.model';
+import { Card } from '@models/card.model';
 
 interface InputDialogData {
-  task: BoardTask;
+  task: Card;
 }
 
 interface OutputDialogData {
@@ -25,12 +25,12 @@ export class TaskDialogComponent {
   faTag = faTag;
   faUser = faUser;
 
-  task: BoardTask;
+  card: Card;
 
   constructor(
     private dialogRef: DialogRef<OutputDialogData>,
     @Inject(DIALOG_DATA) data: InputDialogData) {
-    this.task = data.task;
+    this.card = data.task;
   }
 
   close() {
