@@ -6,19 +6,33 @@ import jwt_decode, { JwtPayload } from 'jwt-decode';
   providedIn: 'root'
 })
 export class TokenService {
-  tokenKeyName = 'token-trello';
+  accessTokenKeyName = 'access-token-trello';
+  refreshTokenKeyName = 'refresh-token-trello';
 
   setToken(token: string) {
-    setCookie(this.tokenKeyName, token, { expires: 365, path: '/' });
+    setCookie(this.accessTokenKeyName, token, { expires: 365, path: '/' });
   }
 
   getToken() {
-    const token = getCookie(this.tokenKeyName);
+    const token = getCookie(this.accessTokenKeyName);
     return token;
   }
 
   removeToken() {
-    removeCookie(this.tokenKeyName);
+    removeCookie(this.accessTokenKeyName);
+  }
+
+  setRefreshToken(token: string) {
+    setCookie(this.refreshTokenKeyName, token, { expires: 365, path: '/' });
+  }
+
+  getRefreshToken() {
+    const token = getCookie(this.refreshTokenKeyName);
+    return token;
+  }
+
+  removeRefreshToken() {
+    removeCookie(this.refreshTokenKeyName);
   }
 
   hasToken(): boolean {
@@ -28,6 +42,22 @@ export class TokenService {
 
   isValidToken(): boolean {
     const currentToken = this.getToken();
+    if (!currentToken) {
+      return false;
+    }
+
+    const decodedToken = jwt_decode<JwtPayload>(currentToken);
+    if (decodedToken && decodedToken?.exp) {
+      const expirationDate = new Date(0);
+      expirationDate.setUTCSeconds(decodedToken.exp);
+      return expirationDate.getTime() > new Date().getTime();
+    }
+
+    return false;
+  }
+
+  isValidRefreshToken(): boolean {
+    const currentToken = this.getRefreshToken();
     if (!currentToken) {
       return false;
     }
