@@ -7,6 +7,7 @@ import { Board } from '@models/board.model';
 import { BoardTask } from '@models/board-task.model';
 import { Card } from '@models/card.model';
 import { BoardsService } from '@services/boards/boards.service';
+import { CardsService } from '@services/cards/cards.service';
 
 import { TaskDialogComponent } from '../../components/task-dialog/task-dialog.component';
 
@@ -37,7 +38,8 @@ export class BoardComponent implements OnInit {
   constructor(
     private dialog: Dialog,
     private activatedRoute: ActivatedRoute,
-    private boardsService: BoardsService
+    private boardsService: BoardsService,
+    private cardsService: CardsService
   ) { }
 
   ngOnInit() {
@@ -68,6 +70,11 @@ export class BoardComponent implements OnInit {
         event.currentIndex,
       );
     }
+
+    const card = event.container.data[event.currentIndex];
+    const listId = event.container.id;
+    const newPosition = this.boardsService.getPosition(event.container.data, event.currentIndex);
+    this.updateCardInfo(card, listId, newPosition);
   }
 
   addColumn() {
@@ -78,6 +85,13 @@ export class BoardComponent implements OnInit {
       cards: [],
       items: []
     }); */
+  }
+
+  private updateCardInfo(card: Card, listId: string, newPosition: number) {
+    this.cardsService.update(card.id, { listId: listId, position: newPosition })
+      .subscribe((cardUpdated) => {
+        console.log(cardUpdated);
+      });
   }
 
   openDialog(task: Card) {

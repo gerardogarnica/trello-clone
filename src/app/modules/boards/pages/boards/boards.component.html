@@ -60,7 +60,7 @@
     <div class="w-full">
         <h1 class="text-lg font-bold mb-4"><fa-icon [icon]="faClock"></fa-icon> Recently viewed</h1>
         <div class="grid grid-cols-4 gap-4">
-            <a [routerLink]="['/app/boards/', board.id]" *ngFor="let board of boards">
+            <a [routerLink]="['/trello/boards/', board.id]" *ngFor="let board of boards">
                 <app-card-color [color]="board.backgroundColor">
                     {{ board.title }}
                 </app-card-color>
