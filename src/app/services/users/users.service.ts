@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { checkToken } from '@interceptors/token.interceptor';
 import { User } from '@models/user.model';
-import { TokenService } from '@services/token/token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,7 @@ export class UsersService {
   apiUrl = `https://fake-trello-api.herokuapp.com/api/v1/users`
 
   constructor(
-    private http: HttpClient,
-    private tokenService: TokenService
+    private http: HttpClient
   ) { }
 
   getAll() {
