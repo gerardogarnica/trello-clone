@@ -50,6 +50,14 @@ export class BoardsService {
     return 0;
   }
 
+  getNewCardPosition(cards: Card[]): number {
+    if (cards.length === 0) {
+      return this.cardBufferSpace;
+    }
+
+    return cards[cards.length - 1].position + this.cardBufferSpace;
+  }
+
   create(changes: CreateBoardDto) {
     return this.http.post<Board>(`${this.apiUrl}`, changes, { context: checkToken() });
   }

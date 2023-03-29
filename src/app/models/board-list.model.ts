@@ -1,4 +1,3 @@
-import { BoardTask } from "./board-task.model";
 import { Card } from "./card.model";
 
 export interface BoardList {
@@ -6,5 +5,5 @@ export interface BoardList {
     title: string;
     position: number;
     cards: Card[];
-    items: BoardTask[];
+    showNewCardForm?: boolean;
 }

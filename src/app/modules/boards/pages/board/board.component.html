@@ -28,6 +28,40 @@
                         {{ card.title }}
                     </div>
                 </div>
+
+                <div class="mt-5">
+                    <app-main-button
+                        *ngIf="!list.showNewCardForm"
+                        [colorStyle]="'shadow'"
+                        (click)="openNewCardForm(list)">
+                        Add Card
+                    </app-main-button>
+                    <div
+                        *ngIf="list.showNewCardForm"
+                        class="w-full">
+                        <form [formGroup]="formNewCard" novalidate class="space-y-4" (ngSubmit)="doCreateCard($event, list)">
+                            <div>
+                                <div class="relative">
+                                    <input
+                                        type="text"
+                                        id="title"
+                                        formControlName="title"
+                                        placeholder="Enter card title"
+                                        maxlength="50"
+                                        class="w-full rounded bg-gray-100 border-gray-300 border-2">
+                                    <div class="flex space-x-2 justify-between">
+                                        <app-main-button [colorStyle]="'success'" [type]="'submit'">
+                                            Create
+                                        </app-main-button>
+                                        <app-main-button [colorStyle]="'danger'" (click)="closeNewCardForm(list)">
+                                            Close
+                                        </app-main-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <app-main-button class="shrink-0" (click)="addColumn()">Add Board</app-main-button>

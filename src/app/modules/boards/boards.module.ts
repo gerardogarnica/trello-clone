@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DialogModule } from '@angular/cdk/dialog';
@@ -26,6 +27,7 @@ import { SharedModule } from '@shared/shared.module';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     BoardsRoutingModule,
     CdkAccordionModule,
     DragDropModule,
