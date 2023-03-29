@@ -11,3 +11,8 @@ export interface Board {
     lists: BoardList[];
     cards: Card[];
 }
+
+export interface CreateBoardDto {
+    title: string;
+    backgroundColor: Colors;
+}

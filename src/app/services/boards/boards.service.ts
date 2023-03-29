@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { checkToken } from '@interceptors/token.interceptor';
-import { Board } from '@models/board.model';
+import { Board, CreateBoardDto } from '@models/board.model';
 import { Card } from '@models/card.model';
 
 @Injectable({
@@ -48,5 +48,9 @@ export class BoardsService {
     }
 
     return 0;
+  }
+
+  create(changes: CreateBoardDto) {
+    return this.http.post<Board>(`${this.apiUrl}`, changes, { context: checkToken() });
   }
 }

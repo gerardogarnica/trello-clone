@@ -9,7 +9,7 @@
                     <ul class="flex items-center space-x-8 text-sm font-medium">
                         <li>
                             <app-main-button
-                                [colorStyle]="'primary'"
+                                [colorStyle]="'sky'"
                                 (click)="isOpenOverlayBoards = !isOpenOverlayBoards"
                                 cdkOverlayOrigin
                                 #boardsOverlay="cdkOverlayOrigin">
@@ -23,7 +23,16 @@
                             <a routerLink="/trello/users" class="block py-3 px-4 text-white">Users</a>
                         </li>
                         <li>
-                            <app-main-button [type]="'button'">Create</app-main-button>
+                            <app-main-button
+                                [type]="'button'"
+                                [colorStyle]="'sky'"
+                                (click)="isOpenOverlayCreate = !isOpenOverlayCreate"
+                                cdkOverlayOrigin
+                                #createOverlay="cdkOverlayOrigin">
+                                <span class="flex space-x-2 text-left">
+                                    <span>Create</span>
+                                    <fa-icon [icon]="faAngleDown"></fa-icon>
+                                </span></app-main-button>
                         </li>
                     </ul>
                 </div>
@@ -106,6 +115,24 @@
                 </button>
             </div>
             <div class="py-3 px-4 flex justify-between">Content</div>
+        </div>
+    </ng-template>
+
+    <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="createOverlay"
+        [cdkConnectedOverlayOpen]="isOpenOverlayCreate"
+        (overlayOutsideClick)="isOpenOverlayCreate = !isOpenOverlayCreate">
+        <div class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow">
+            <div class="py-2 px-4 text-center relative">
+                <span class="block text-normal text-gray-900">Create New Board</span>
+                <button (click)="isOpenOverlayCreate = !isOpenOverlayCreate" class="block text-sm text-gray-900 absolute right-3 top-3">
+                    <fa-icon [icon]="faClose"></fa-icon>
+                </button>
+            </div>
+            <div class="py-3 px-4 flex justify-between">
+                <app-board-form (closeOverlay)="doCloseOverlayCreate($event)"></app-board-form>
+            </div>
         </div>
     </ng-template>
 </ng-container>
