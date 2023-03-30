@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -7,6 +7,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Board } from '@models/board.model';
 import { BoardList } from '@models/board-list.model';
 import { Card } from '@models/card.model';
+import { BACKGROUND_COLORS } from '@models/colors.model';
 import { BoardsService } from '@services/boards/boards.service';
 import { CardsService } from '@services/cards/cards.service';
 import { ListsService } from '@services/lists/lists.service';
@@ -30,7 +31,7 @@ import { TaskDialogComponent } from '../../components/task-dialog/task-dialog.co
     `
   ]
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   formNewCard = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(3)]]
   });
@@ -38,6 +39,7 @@ export class BoardComponent implements OnInit {
     title: ['', [Validators.required, Validators.minLength(3)]]
   });
   board: Board | null = null;
+  backgroundColors = BACKGROUND_COLORS;
   showNewListForm = false;
 
   constructor(
@@ -59,11 +61,25 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.boardsService.setBackgroundColor('sky');
+  }
+
   private getBoard(boardId: Board['id']) {
     this.boardsService.getBoard(boardId)
       .subscribe(board => {
         this.board = board;
+        this.boardsService.setBackgroundColor(board.backgroundColor);
       });
+  }
+
+  get colors() {
+    if (this.board) {
+      const classes = this.backgroundColors[this.board.backgroundColor];
+      return classes ? classes : {};
+    }
+
+    return {};
   }
 
   drop(event: CdkDragDrop<Card[]>) {

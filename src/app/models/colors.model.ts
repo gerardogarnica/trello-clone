@@ -28,38 +28,110 @@ export const COLORS: GetColors = {
         'focus:ring-gray-50': true
     },
     sky: {
-        'bg-sky-700': true,
+        'bg-sky-500': true,
         'hover:bg-sky-800': true,
         'text-white': true
     },
     blue: {
-        'bg-blue-700': true,
+        'bg-blue-500': true,
         'hover:bg-blue-800': true,
         'text-white': true
     },
     gray: {
-        'bg-gray-700': true,
+        'bg-gray-500': true,
         'hover:bg-gray-800': true,
         'text-white': true
     },
     green: {
-        'bg-green-700': true,
+        'bg-green-500': true,
         'hover:bg-green-800': true,
         'text-white': true
     },
     red: {
-        'bg-red-700': true,
+        'bg-red-500': true,
         'hover:bg-red-800': true,
         'text-white': true
     },
     violet: {
-        'bg-violet-700': true,
+        'bg-violet-500': true,
         'hover:bg-violet-800': true,
         'text-white': true
     },
     yellow: {
-        'bg-yellow-700': true,
+        'bg-yellow-500': true,
         'hover:bg-yellow-800': true,
         'text-white': true
+    }
+}
+
+export const BACKGROUND_COLORS: GetColors = {
+    success: {
+        'bg-success-500': true
+    },
+    danger: {
+        'bg-danger-500': true
+    },
+    primary: {
+        'bg-primary-500': true
+    },
+    shadow: {
+        'bg-gray-100': true
+    },
+    sky: {
+        'bg-sky-400': true
+    },
+    blue: {
+        'bg-blue-400': true
+    },
+    gray: {
+        'bg-gray-400': true
+    },
+    green: {
+        'bg-green-400': true
+    },
+    red: {
+        'bg-red-400': true
+    },
+    violet: {
+        'bg-violet-400': true
+    },
+    yellow: {
+        'bg-yellow-400': true
+    }
+}
+
+export const NAVBAR_BACKGROUND_COLORS: GetColors = {
+    success: {
+        'bg-success-500': true
+    },
+    danger: {
+        'bg-danger-500': true
+    },
+    primary: {
+        'bg-primary-500': true
+    },
+    shadow: {
+        'bg-gray-100': true
+    },
+    sky: {
+        'bg-sky-500': true
+    },
+    blue: {
+        'bg-blue-500': true
+    },
+    gray: {
+        'bg-gray-500': true
+    },
+    green: {
+        'bg-green-500': true
+    },
+    red: {
+        'bg-red-500': true
+    },
+    violet: {
+        'bg-violet-500': true
+    },
+    yellow: {
+        'bg-yellow-500': true
     }
 }

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 import { checkToken } from '@interceptors/token.interceptor';
 import { Board, CreateBoardDto } from '@models/board.model';
 import { BoardList } from '@models/board-list.model';
 import { Card } from '@models/card.model';
+import { Colors } from '@models/colors.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ import { Card } from '@models/card.model';
 export class BoardsService {
   apiUrl = `https://fake-trello-api.herokuapp.com/api/v1/boards`
   cardBufferSpace = 65535;
+  boardBackgroundColor$ = new BehaviorSubject<Colors>('sky');
 
   constructor(
     private http: HttpClient
@@ -61,5 +64,9 @@ export class BoardsService {
 
   create(changes: CreateBoardDto) {
     return this.http.post<Board>(`${this.apiUrl}`, changes, { context: checkToken() });
+  }
+
+  setBackgroundColor(color: Colors) {
+    this.boardBackgroundColor$.next(color);
   }
 }
