@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { checkToken } from '@interceptors/token.interceptor';
 import { Board, CreateBoardDto } from '@models/board.model';
+import { BoardList } from '@models/board-list.model';
 import { Card } from '@models/card.model';
 
 @Injectable({
@@ -50,12 +51,12 @@ export class BoardsService {
     return 0;
   }
 
-  getNewCardPosition(cards: Card[]): number {
-    if (cards.length === 0) {
+  getNewCardPosition(elements: Card[] | BoardList[]): number {
+    if (elements.length === 0) {
       return this.cardBufferSpace;
     }
 
-    return cards[cards.length - 1].position + this.cardBufferSpace;
+    return elements[elements.length - 1].position + this.cardBufferSpace;
   }
 
   create(changes: CreateBoardDto) {

@@ -9,6 +9,7 @@ import { BoardList } from '@models/board-list.model';
 import { Card } from '@models/card.model';
 import { BoardsService } from '@services/boards/boards.service';
 import { CardsService } from '@services/cards/cards.service';
+import { ListsService } from '@services/lists/lists.service';
 
 import { TaskDialogComponent } from '../../components/task-dialog/task-dialog.component';
 
@@ -33,14 +34,19 @@ export class BoardComponent implements OnInit {
   formNewCard = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(3)]]
   });
+  formNewList = this.formBuilder.nonNullable.group({
+    title: ['', [Validators.required, Validators.minLength(3)]]
+  });
   board: Board | null = null;
+  showNewListForm = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialog: Dialog,
     private activatedRoute: ActivatedRoute,
     private boardsService: BoardsService,
-    private cardsService: CardsService
+    private cardsService: CardsService,
+    private listsService: ListsService
   ) { }
 
   ngOnInit() {
@@ -78,16 +84,6 @@ export class BoardComponent implements OnInit {
     this.updateCardInfo(card, listId, newPosition);
   }
 
-  addColumn() {
-    /* this.columns.push({
-      id: '0',
-      title: 'New Column',
-      position: 1,
-      cards: [],
-      items: []
-    }); */
-  }
-
   private updateCardInfo(card: Card, listId: string, newPosition: number) {
     this.cardsService.update(card.id, { listId: listId, position: newPosition })
       .subscribe((cardUpdated) => {
@@ -95,13 +91,10 @@ export class BoardComponent implements OnInit {
       });
   }
 
-  addCard(list: BoardList) {
-    console.log(list);
-  }
-
   openNewCardForm(list: BoardList) {
     this.board?.lists.forEach(list => list.showNewCardForm = false);
     list.showNewCardForm = true;
+    this.showNewListForm = false;
   }
 
   closeNewCardForm(list: BoardList) {
@@ -127,6 +120,36 @@ export class BoardComponent implements OnInit {
         list.cards.push(card);
         list.showNewCardForm = false;
         this.formNewCard.reset();
+      });
+  }
+
+  openNewListForm() {
+    this.showNewListForm = true;
+    this.board?.lists.forEach(list => list.showNewCardForm = false);
+  }
+
+  doCreateList(event: Event) {
+    event.preventDefault();
+    if (this.formNewList.invalid) {
+      this.formNewList.markAllAsTouched();
+      return;
+    }
+
+    const { title } = this.formNewList.getRawValue();
+
+    this.listsService
+      .create({
+        title: title,
+        boardId: this.board?.id,
+        position: (this.board?.lists?.length ?? 0) + 1
+      })
+      .subscribe((list) => {
+        this.board?.lists.push({
+          ...list,
+          cards: []
+        });
+        this.showNewListForm = false;
+        this.formNewList.reset();
       });
   }
 

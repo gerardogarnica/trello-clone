@@ -64,7 +64,39 @@
                 </div>
             </div>
 
-            <app-main-button class="shrink-0" (click)="addColumn()">Add Board</app-main-button>
+            <div class="shrink-0">
+                <app-main-button
+                    *ngIf="!showNewListForm"
+                    [colorStyle]="'shadow'"
+                    (click)="openNewListForm()">
+                    Add New List
+                </app-main-button>
+                <div
+                    *ngIf="showNewListForm"
+                    class="w-full">
+                    <form [formGroup]="formNewList" novalidate class="space-y-4" (ngSubmit)="doCreateList($event)">
+                        <div>
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    id="title"
+                                    formControlName="title"
+                                    placeholder="Enter list title"
+                                    maxlength="50"
+                                    class="w-full rounded bg-gray-100 border-gray-300 border-2">
+                                <div class="flex space-x-2 justify-between">
+                                    <app-main-button [colorStyle]="'success'" [type]="'submit'">
+                                        Create
+                                    </app-main-button>
+                                    <app-main-button [colorStyle]="'danger'" (click)="showNewListForm = false">
+                                        Close
+                                    </app-main-button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
